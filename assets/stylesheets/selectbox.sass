@@ -1,0 +1,64 @@
+.select-hidden
+  display: none
+  border: 0
+  clip: rect(0 0 0 0)
+  height: 1px
+  margin: -1px
+  overflow: hidden
+  padding: 0
+  position: absolute
+  width: 1px
+
+.select-container
+  font-weight: 400
+  position: relative
+  display: inline-block
+  min-width: 150px
+  z-index: 10
+  &.opened
+    ul
+      visibility: visible
+      border-top-left-radius: 0
+      border-top-right-radius: 0
+      border-top-color: transparent
+    .select-current
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+      border-bottom-color: transparent
+  .select-current
+    cursor: pointer
+    border: 1px solid #c8c8c8
+    border-radius: 4px
+    background-color: #f7f7f7
+    padding: 10px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    &:after
+      @include size(0,0)
+      content: ''
+      border-left: 5px solid transparent
+      border-right: 5px solid transparent
+      border-top: 5px solid $primary-font-color
+      margin-left: 10px
+  ul
+    visibility: hidden
+    margin: 0
+    border-radius: 4px
+    border: 1px solid #c8c8c8
+    background-color: #f7f7f7
+    padding: 0
+    position: absolute
+    top: 100%
+    left: 0
+    right: 0
+    margin-top: -1px
+    li
+      padding: 10px
+      cursor: pointer
+      list-style: none
+      &:last-child
+        border-bottom-left-radius: 5px
+        border-bottom-right-radius: 5px
+      &:hover
+        background-color: #ece9e9
