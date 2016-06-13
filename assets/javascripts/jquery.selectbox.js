@@ -5,7 +5,7 @@
     this.originalSelect = $(select);
     this.styledSelect = this.generateStyledSelect();
     this.initialize();
-  }
+  };
 
   Select.prototype.select = function(value){
     if(this.currentVal != value){
@@ -15,15 +15,17 @@
       this.currentVal = value;
     }
     this.close();
-  }
+  };
 
   Select.prototype.toggle = function(){
+    if (!this.isOnScreen(this.styledSelect.find('ul')))
+      this.styledSelect.addClass('direction-reverse');
     this.styledSelect.toggleClass('opened');
   }
 
   Select.prototype.close = function(){
    this.styledSelect.removeClass('opened');
-  }
+  };
 
   Select.prototype.initialize = function(){
     var self = this;
@@ -37,7 +39,7 @@
         self.close();
       }
     });
-  }
+  };
 
   Select.prototype.generateStyledSelect = function(){
     var container = $(document.createElement('div')).addClass('select-container');
@@ -51,10 +53,36 @@
       list.append(li);
     });
 
-    container.append(current)
-    container.append(list)
+    current.text(this.originalSelect.find(':selected').val());
+    container.append(current);
+    container.append(list);
     return container;
-  }
+  };
+
+  Select.prototype.isOnScreen = function(el){
+
+    var viewport = {};
+    viewport.top = $(window).scrollTop();
+    viewport.bottom = viewport.top + $(window).height();
+
+    var height = el.outerHeight();
+    var bounds = el.offset();
+    bounds.bottom = bounds.top + height;
+
+    var visible = !(viewport.bottom < bounds.top || viewport.top > bounds.bottom);
+
+    if(!visible){
+      return false;
+    }
+
+    var delta = {
+      top : Math.min( 1, ( bounds.bottom - viewport.top ) / height),
+      bottom : Math.min(1, ( viewport.bottom - bounds.top ) / height)
+    };
+
+    return (delta.top * delta.bottom) >= 1;
+  };
+      
 
   $.fn.select = function(){
     this.each(function(){ new Select(this); });
