@@ -9,7 +9,7 @@
 
   Select.prototype.select = function(value){
     if(this.currentVal != value){
-      var li = this.styledSelect.list.find('[data-value=' + value + ']');
+      var li = this.styledSelect.list.find('[data-value="' + value + '"]');
       this.styledSelect.current.text(li.text());
       this.originalSelect.val(li.data('value')).change();
       this.currentVal = value;
@@ -19,6 +19,7 @@
 
   Select.prototype.toggle = function(){
     if (!this.isOnScreen(this.styledSelect.find('ul')))
+<<<<<<< HEAD
       this.styledSelect.addClass('direction-reverse');
     this.styledSelect.toggleClass('opened');
   }
@@ -26,12 +27,20 @@
   Select.prototype.close = function(){
    this.styledSelect.removeClass('opened');
   };
+=======
+      this.styledSelect.addClass('direction-reverse')
+    this.styledSelect.toggleClass('opened')
+  }
+
+  Select.prototype.close = function(){
+   this.styledSelect.removeClass('opened')
+  }
+>>>>>>> e50862c... Viewport detection
 
   Select.prototype.initialize = function(){
     var self = this;
     this.originalSelect.addClass('select-hidden');
     this.styledSelect.insertAfter(this.originalSelect);
-    this.select(this.originalSelect.find(':selected').val());
     this.styledSelect.on('click', 'li', function(){ self.select(this.dataset.value); });
     this.styledSelect.on('click', '.select-current', function(){ self.toggle(); });
     $(document).click(function (e){
@@ -53,15 +62,46 @@
       list.append(li);
     });
 
+<<<<<<< HEAD
     current.text(this.originalSelect.find(':selected').val());
     container.append(current);
     container.append(list);
+=======
+    current.text(this.originalSelect.find(':selected').val())
+    container.append(current)
+    container.append(list)
+>>>>>>> e50862c... Viewport detection
     return container;
   };
 
   Select.prototype.isOnScreen = function(el){
 
     var viewport = {};
+    viewport.top = $(window).scrollTop();
+    viewport.bottom = viewport.top + $(window).height();
+
+    var height = el.outerHeight();
+    var bounds = el.offset();
+    bounds.bottom = bounds.top + height;
+
+    var visible = !(viewport.bottom < bounds.top || viewport.top > bounds.bottom);
+
+    if(!visible){
+      return false;
+    }
+
+    var delta = {
+      top : Math.min( 1, ( bounds.bottom - viewport.top ) / height),
+      bottom : Math.min(1, ( viewport.bottom - bounds.top ) / height)
+    };
+
+    return (delta.top * delta.bottom) >= 1;
+  };
+      
+
+  Select.prototype.isOnScreen = function(el){
+
+    var viewport = {}
     viewport.top = $(window).scrollTop();
     viewport.bottom = viewport.top + $(window).height();
 
