@@ -19,23 +19,13 @@
 
   Select.prototype.toggle = function(){
     if (!this.isOnScreen(this.styledSelect.find('ul')))
-<<<<<<< HEAD
       this.styledSelect.addClass('direction-reverse');
     this.styledSelect.toggleClass('opened');
-  }
+  };
 
   Select.prototype.close = function(){
    this.styledSelect.removeClass('opened');
   };
-=======
-      this.styledSelect.addClass('direction-reverse')
-    this.styledSelect.toggleClass('opened')
-  }
-
-  Select.prototype.close = function(){
-   this.styledSelect.removeClass('opened')
-  }
->>>>>>> e50862c... Viewport detection
 
   Select.prototype.initialize = function(){
     var self = this;
@@ -62,15 +52,9 @@
       list.append(li);
     });
 
-<<<<<<< HEAD
     current.text(this.originalSelect.find(':selected').val());
     container.append(current);
     container.append(list);
-=======
-    current.text(this.originalSelect.find(':selected').val())
-    container.append(current)
-    container.append(list)
->>>>>>> e50862c... Viewport detection
     return container;
   };
 
