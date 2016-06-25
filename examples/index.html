@@ -1,7 +1,27 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/selectbox.css">
+    <script src="../assets/javascripts/jquery-3.0.0.min.js"></script>
+    <script src="../assets/javascripts/jquery.selectbox.js"></script> 
+    <style>
+      body {
+        background: url('mem.jpg') no-repeat 50% 50%;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
-  <body>
-    No examples! HUE HUE HUE.
+  <body> 
+    <select>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+    <script>
+      $('select').select();
+    </script>
   </body>
 </html>
