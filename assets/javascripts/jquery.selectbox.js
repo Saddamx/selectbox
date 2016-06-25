@@ -52,7 +52,7 @@
       list.append(li);
     });
 
-    current.text(this.originalSelect.find(':selected').val());
+    current.text(this.originalSelect.find(':selected').text());
     container.append(current);
     container.append(list);
     return container;
